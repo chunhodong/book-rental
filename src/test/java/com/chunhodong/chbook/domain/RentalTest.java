@@ -44,13 +44,15 @@ public class RentalTest {
     @DisplayName("대출목록이 5개 이상이면 예외발생")
     void checkRentalAvailableAtGreaterThanItems(){
         HashSet rentedItems = new HashSet();
-        rentedItems.add(new RentedItem());
-        rentedItems.add(new RentedItem());
-        rentedItems.add(new RentedItem());
-        rentedItems.add(new RentedItem());
-        rentedItems.add(new RentedItem());
+        rentedItems.add(RentedItem.builder().build());
+        rentedItems.add(RentedItem.builder().build());
+        rentedItems.add(RentedItem.builder().build());
+        rentedItems.add(RentedItem.builder().build());
+        rentedItems.add(RentedItem.builder().build());
+
         Rental rental = Rental.builder()
                 .rentalStatus(RentalStatus.RENTAL_AVAILABLE)
+                .lateFee(0L)
                 .rentedItems(rentedItems)
                 .build();
 

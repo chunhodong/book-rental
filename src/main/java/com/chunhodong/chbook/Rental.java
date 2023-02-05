@@ -25,7 +25,7 @@ public class Rental {
     @Enumerated(EnumType.STRING)
     private RentalStatus rentalStatus;
     @Column(name = "late_fee")
-    private Long lateFee;
+    private Long lateFee = DEFAULT_RENTAL_FEE;
     @OneToMany(mappedBy = "rental",cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RentedItem> rentedItems = new HashSet();
 
@@ -38,12 +38,16 @@ public class Rental {
     }
 
     public void checkRentalAvailable() {
-        if(rentalStatus == RentalStatus.RENTAL_UNAVILABLE){
+        if(rentalStatus == RentalStatus.RENTAL_UNAVILABLE || getLateFee() != DEFAULT_RENTAL_FEE){
             throw new RentalUnavailableException("연체 상태입니다. 연체료를 정산 후, 도서를 대출하실 수 있습니다.");
         }
 
         if(rentedItems.size() >= 5){
             throw new RentalUnavailableException("대출 가능한 도서의 수는 5권까지입니다.");
         }
+    }
+
+    public Rental rentBook(Long bookId,String title){
+        return null;
     }
 }
