@@ -1,4 +1,4 @@
-package com.chunhodong.chbook;
+package com.chunhodong.chbook.dto;
 
 import lombok.Getter;
 
